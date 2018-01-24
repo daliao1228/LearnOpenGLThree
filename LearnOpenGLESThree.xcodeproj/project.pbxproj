@@ -19,6 +19,7 @@
 		291925D51FAC75DB0018B711 /* boat.png in Resources */ = {isa = PBXBuildFile; fileRef = 291925D41FAC75DB0018B711 /* boat.png */; };
 		291925D91FAC7A740018B711 /* VertexShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 291925D81FAC7A740018B711 /* VertexShader.vsh */; };
 		291925DB1FAC81CB0018B711 /* FragmentShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 291925DA1FAC81CB0018B711 /* FragmentShader.fsh */; };
+		29B66E7A201836C300BBF155 /* wall.png in Resources */ = {isa = PBXBuildFile; fileRef = 29B66E79201836C300BBF155 /* wall.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		291925D41FAC75DB0018B711 /* boat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boat.png; sourceTree = "<group>"; };
 		291925D81FAC7A740018B711 /* VertexShader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = VertexShader.vsh; sourceTree = "<group>"; };
 		291925DA1FAC81CB0018B711 /* FragmentShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = FragmentShader.fsh; sourceTree = "<group>"; };
+		29B66E79201836C300BBF155 /* wall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wall.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 				291925D41FAC75DB0018B711 /* boat.png */,
 				291925D81FAC7A740018B711 /* VertexShader.vsh */,
 				291925DA1FAC81CB0018B711 /* FragmentShader.fsh */,
+				29B66E79201836C300BBF155 /* wall.png */,
 			);
 			path = LearnOpenGLESThree;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 				291925D91FAC7A740018B711 /* VertexShader.vsh in Resources */,
 				291925DB1FAC81CB0018B711 /* FragmentShader.fsh in Resources */,
 				291925A71FAC67FB0018B711 /* Main.storyboard in Resources */,
+				29B66E7A201836C300BBF155 /* wall.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

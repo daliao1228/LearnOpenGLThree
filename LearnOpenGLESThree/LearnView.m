@@ -19,6 +19,7 @@
 @property (nonatomic, assign) GLuint inputTextureCoordinate;
 @property (nonatomic, assign) GLuint inputTextureColor;
 @property (nonatomic, assign) GLuint inputImageTexture;
+@property (nonatomic, assign) GLuint inputImageTexture2;
 
 @end
 
@@ -141,7 +142,10 @@
     glVertexAttribPointer(self.inputTextureCoordinate, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void *)(5 * sizeof(float))); //
 
     self.inputImageTexture = glGetUniformLocation(self.shaderProgram, "inputImageTexture");
-    glUniform1f(self.inputImageTexture, 2);
+    glUniform1i(self.inputImageTexture, 0);
+    
+    self.inputImageTexture2 = glGetUniformLocation(self.shaderProgram, "inputImageTexture2");
+    glUniform1i(self.inputImageTexture2, 1);
     
     UIImage *image = [UIImage imageNamed:@"boat"];
 
@@ -160,8 +164,31 @@
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image.size.width, image.size.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, [pixelNSData bytes]);
         glGenerateMipmap(GL_TEXTURE_2D);
     }
+    glBindTexture(GL_TEXTURE_2D, 0);
 
+    UIImage *image2 = [UIImage imageNamed:@"wall"];
+    CFDataRef pixelData2 = CGDataProviderCopyData(CGImageGetDataProvider([image2 CGImage]));
+    NSData *pixelNSData2 = (__bridge NSData *)pixelData;
+    
+    GLuint texture2;
+    glGenTextures(1, &texture2);
+    glBindTexture(GL_TEXTURE_2D, texture2);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); // 采用s轴重复
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT); // 采用t轴重复
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); // 线性的，就是一个点取周围9个点的平均值，如果超出
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); // 同理，如果低于
+    
+    if (pixelData2) {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image.size.width, image.size.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, [pixelNSData2 bytes]);
+        glGenerateMipmap(GL_TEXTURE_2D);
+    }
+    glBindTexture(GL_TEXTURE_2D, 0);
+    
+    glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texture);
+    
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, texture2);
     
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0); // 注意，我才发现这个坑，glDrawglDrawElements和drawArray都只能画出三角形，也就是说，支持三个点的输入，如果话方形，至少六个点！！
     
